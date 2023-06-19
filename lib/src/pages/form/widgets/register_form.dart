@@ -31,69 +31,71 @@ class RegisterForm extends StatelessWidget {
           horizontal: screenSize.width * 0.05,
           vertical: screenSize.height * 0.03,
         ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            TestAppFormField(
-              controller: registerStore.descripcionInputTextFieldController,
-              hintText: 'Descripcion',
-              onChanged: registerStore.validateForm,
-            ),
-            SizedBox(
-              height: screenSize.height * 0.03,
-            ),
-            TestAppFormField(
-              controller: registerStore.valorInputTextFieldController,
-              hintText: 'Valor',
-              onChanged: registerStore.validateForm,
-              inputType: TextInputType.number,
-              formaters: [
-                FilteringTextInputFormatter.allow(
-                  RegExp('[0-9]'),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: screenSize.height * 0.03,
-            ),
-            TestAppFormField(
-              controller: registerStore.comprobarInputTextFieldController,
-              hintText: 'Comprobar',
-              onChanged: registerStore.validateForm,
-              inputType: TextInputType.number,
-              formaters: [
-                FilteringTextInputFormatter.allow(
-                  RegExp('[0-1]'),
-                ),
-              ],
-            ),
-            SizedBox(
-              height: screenSize.height * 0.03,
-            ),
-            TestAppFormField(
-              controller: registerStore.fechaInputTextFieldController,
-              hintText: 'Fecha',
-              onChanged: registerStore.validateForm,
-              inputType: TextInputType.datetime,
-              formaters: [
-                FilteringTextInputFormatter.allow(
-                  RegExp('[0-9-() ]'),
-                ),
-                TextInputMask(mask: '9999-99-99 99:99:99'),
-              ],
-            ),
-            SizedBox(
-              height: screenSize.height * 0.03,
-            ),
-            Observer(
-              builder: ((context) => TestAppButton(
-                    text: 'Send',
-                    callback: registerStore.isFormValid
-                        ? () => registerStore.addOrUpdateRegister()
-                        : null,
-                  )),
-            )
-          ],
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              TestAppFormField(
+                controller: registerStore.descripcionInputTextFieldController,
+                hintText: 'Descripcion',
+                onChanged: registerStore.validateForm,
+              ),
+              SizedBox(
+                height: screenSize.height * 0.03,
+              ),
+              TestAppFormField(
+                controller: registerStore.valorInputTextFieldController,
+                hintText: 'Valor',
+                onChanged: registerStore.validateForm,
+                inputType: TextInputType.number,
+                formaters: [
+                  FilteringTextInputFormatter.allow(
+                    RegExp('[0-9]'),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: screenSize.height * 0.03,
+              ),
+              TestAppFormField(
+                controller: registerStore.comprobarInputTextFieldController,
+                hintText: 'Comprobar',
+                onChanged: registerStore.validateForm,
+                inputType: TextInputType.number,
+                formaters: [
+                  FilteringTextInputFormatter.allow(
+                    RegExp('[0-1]'),
+                  ),
+                ],
+              ),
+              SizedBox(
+                height: screenSize.height * 0.03,
+              ),
+              TestAppFormField(
+                controller: registerStore.fechaInputTextFieldController,
+                hintText: 'Fecha',
+                onChanged: registerStore.validateForm,
+                inputType: TextInputType.datetime,
+                formaters: [
+                  FilteringTextInputFormatter.allow(
+                    RegExp('[0-9-() ]'),
+                  ),
+                  TextInputMask(mask: '9999-99-99 99:99:99'),
+                ],
+              ),
+              SizedBox(
+                height: screenSize.height * 0.03,
+              ),
+              Observer(
+                builder: ((context) => TestAppButton(
+                      text: 'Send',
+                      callback: registerStore.isFormValid
+                          ? () => registerStore.addOrUpdateRegister()
+                          : null,
+                    )),
+              )
+            ],
+          ),
         ),
       ),
     );

@@ -15,6 +15,7 @@ class DetailPage extends StatelessWidget {
       builder: (_) => Stack(
         children: [
           const Scaffold(
+            resizeToAvoidBottomInset: false,
             appBar: TestAppAppbar(title: 'Detail'),
             body: DetailCard(),
           ),

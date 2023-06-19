@@ -15,6 +15,7 @@ class FormPage extends StatelessWidget {
       builder: (_) => Stack(
         children: [
           Scaffold(
+            resizeToAvoidBottomInset: false,
             appBar: TestAppAppbar(
               title: registerStore.isEdit
                   ? 'Edit: ${registerStore.selectedRegister?.idPrueba}'
