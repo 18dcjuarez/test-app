@@ -73,6 +73,22 @@ mixin _$RegisterStore on RegisterPrivate, Store {
     });
   }
 
+  late final _$isFormValidAtom =
+      Atom(name: 'RegisterPrivate.isFormValid', context: context);
+
+  @override
+  bool get isFormValid {
+    _$isFormValidAtom.reportRead();
+    return super.isFormValid;
+  }
+
+  @override
+  set isFormValid(bool value) {
+    _$isFormValidAtom.reportWrite(value, super.isFormValid, () {
+      super.isFormValid = value;
+    });
+  }
+
   late final _$descripcionInputTextFieldControllerAtom = Atom(
       name: 'RegisterPrivate.descripcionInputTextFieldController',
       context: context);
@@ -168,6 +184,53 @@ mixin _$RegisterStore on RegisterPrivate, Store {
         .run(() => super.addOrUpdateRegister());
   }
 
+  late final _$RegisterPrivateActionController =
+      ActionController(name: 'RegisterPrivate', context: context);
+
+  @override
+  void validateForm(String v) {
+    final _$actionInfo = _$RegisterPrivateActionController.startAction(
+        name: 'RegisterPrivate.validateForm');
+    try {
+      return super.validateForm(v);
+    } finally {
+      _$RegisterPrivateActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void startControllers() {
+    final _$actionInfo = _$RegisterPrivateActionController.startAction(
+        name: 'RegisterPrivate.startControllers');
+    try {
+      return super.startControllers();
+    } finally {
+      _$RegisterPrivateActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void cleanControllers() {
+    final _$actionInfo = _$RegisterPrivateActionController.startAction(
+        name: 'RegisterPrivate.cleanControllers');
+    try {
+      return super.cleanControllers();
+    } finally {
+      _$RegisterPrivateActionController.endAction(_$actionInfo);
+    }
+  }
+
+  @override
+  void disposeControllers() {
+    final _$actionInfo = _$RegisterPrivateActionController.startAction(
+        name: 'RegisterPrivate.disposeControllers');
+    try {
+      return super.disposeControllers();
+    } finally {
+      _$RegisterPrivateActionController.endAction(_$actionInfo);
+    }
+  }
+
   @override
   String toString() {
     return '''
@@ -175,6 +238,7 @@ isLoading: ${isLoading},
 registers: ${registers},
 selectedRegister: ${selectedRegister},
 isEdit: ${isEdit},
+isFormValid: ${isFormValid},
 descripcionInputTextFieldController: ${descripcionInputTextFieldController},
 valorInputTextFieldController: ${valorInputTextFieldController},
 fechaInputTextFieldController: ${fechaInputTextFieldController},

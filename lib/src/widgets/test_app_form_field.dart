@@ -17,6 +17,7 @@ class TestAppFormField extends StatefulWidget {
     this.labelError,
     this.showMaskIcon = false,
     this.isPassword = false,
+    this.formaters,
   }) : super(key: key);
 
   final TextEditingController controller;
@@ -31,6 +32,7 @@ class TestAppFormField extends StatefulWidget {
   final String label;
   final Widget? labelError;
   final bool showMaskIcon;
+  final List<TextInputFormatter>? formaters;
   bool isPassword;
 
   @override
@@ -71,6 +73,13 @@ class _TestAppFormFieldState extends State<TestAppFormField> {
           textInputAction: widget.inputAction,
           onEditingComplete: widget.onFinish,
           obscureText: widget.isPassword,
+          inputFormatters: widget.formaters,
+          // inputFormatters: [
+          //   FilteringTextInputFormatter.allow(
+          //     RegExp('[0-9-() ]'),
+          //   ),
+          //   TextInputMask(mask: '9999-99-99 99:99:99'),
+          // ],
         ),
         // const SizedBox(
         //   height: Sizes.verticalLabelToFieldMargin,

@@ -6,6 +6,7 @@ import 'package:test_app_jun17/src/data/services/navigation_service.dart';
 import 'package:test_app_jun17/src/data/services/register_service.dart';
 import 'package:test_app_jun17/src/models/register_model.dart';
 import 'package:test_app_jun17/src/utils/secure_storage_util.dart';
+import 'package:test_app_jun17/src/utils/validators.dart';
 
 part 'register_store.g.dart';
 
@@ -25,6 +26,9 @@ abstract class RegisterPrivate with Store {
 
   @observable
   bool isEdit = false;
+
+  @observable
+  bool isFormValid = false;
 
   @observable
   TextEditingController descripcionInputTextFieldController =
@@ -92,6 +96,7 @@ abstract class RegisterPrivate with Store {
     });
     if (resp.data['correcto'] == true) {
       selectedRegister = null;
+      cleanControllers();
       Navigator.pushNamedAndRemoveUntil(
           NavigationService.navigatorKey.currentContext!,
           AppRoutes.homePage,
@@ -100,20 +105,34 @@ abstract class RegisterPrivate with Store {
     isLoading = false;
   }
 
+  @action
+  void validateForm(String v) {
+    isFormValid = Validators.formValidator(
+        descripcion: descripcionInputTextFieldController.text,
+        valor: valorInputTextFieldController.text,
+        comprobar: comprobarInputTextFieldController.text,
+        fecha: fechaInputTextFieldController.text);
+  }
+
+  @action
   void startControllers() {
+    isFormValid = false;
     descripcionInputTextFieldController.text = selectedRegister!.descripcion!;
     valorInputTextFieldController.text = selectedRegister!.valor!;
     fechaInputTextFieldController.text = selectedRegister!.fecha!;
     comprobarInputTextFieldController.text = selectedRegister!.comprobar!;
   }
 
+  @action
   void cleanControllers() {
+    isFormValid = false;
     descripcionInputTextFieldController.clear();
     valorInputTextFieldController.clear();
     fechaInputTextFieldController.clear();
     comprobarInputTextFieldController.clear();
   }
 
+  @action
   void disposeControllers() {
     descripcionInputTextFieldController.dispose();
     valorInputTextFieldController.dispose();
